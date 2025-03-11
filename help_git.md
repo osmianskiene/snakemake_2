@@ -11,3 +11,10 @@
  git push -u origin main
 ~~~
 
+## Work
+
+Commit & Push
+
+or 
+
+Commit -> Sync Changes
