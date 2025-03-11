@@ -1,7 +1,5 @@
 /.snakemake/
-/calls/
 /data/
-/mapped_reads/
-/plots/
-/sorted_reads/
-/snakemake-tutorial-data-v5.4.5.tar.gz
+/data_output/
+/data_output_multiqc/
+/play_data_ref_annot/
