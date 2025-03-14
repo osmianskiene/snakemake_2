@@ -11,7 +11,8 @@ rule all:
         "data_output_multiqc/multiqc_report.html",
         expand("data_output_bbduk_trimed/{sample}_bbduk.fastq", sample=FASTQ_FILES),
         # expand("data_output_fastqc_trimed/{sample}_fastqc_trimed.html", sample=FASTQ_FILES) 
-        expand("data_output_fastqc_trimed/{sample}_bbduk_fastqc.html", sample=FASTQ_FILES) 
+        expand("data_output_fastqc_trimed/{sample}_bbduk_fastqc.html", sample=FASTQ_FILES),
+        "data_output_multiqc_trimed/multiqc_report.html" 
 
 rule fastqc:
     input:
@@ -44,6 +45,15 @@ rule fastqc_trimed:
         "data_output_fastqc_trimed/{sample}_bbduk_fastqc.html"
     shell:
         "fastqc -o data_output_fastqc_trimed {input}"
+
+rule multiqc_trimed:
+    input:
+        expand("data_output_fastqc_trimed/{sample}_bbduk_fastqc.html", sample=FASTQ_FILES)
+    output:
+        "data_output_multiqc_trimed/multiqc_report.html", 
+    shell:
+        "multiqc data_output_fastqc_trimed -o data_output_multiqc_trimed" 
+
 
 
 
