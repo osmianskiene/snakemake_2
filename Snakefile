@@ -8,7 +8,8 @@ FASTQ_FILES = glob_wildcards("data/{sample}.fastq.gz").sample
 rule all:
     input:
         # expand("data_output/{sample}_fastqc.html", sample=FASTQ_FILES)
-        "data_output_multiqc/multiqc_report.html"
+        "data_output_multiqc/multiqc_report.html",
+        expand("data_output_bbduk_trimed/{sample}_bbduk.fastq", sample=FASTQ_FILES)
 
 rule fastqc:
     input:
@@ -25,6 +26,14 @@ rule multiqc:
         "data_output_multiqc/multiqc_report.html", 
     shell:
         "multiqc data_output -o data_output_multiqc" 
+rule bbduk_trim_barcodes:
+    input:
+        "data/{sample}.fastq.gz"
+    output:
+        "data_output_bbduk_trimed/{sample}_bbduk.fastq", 
+    shell:
+        "bbduk.sh in={input} out={output} ref=data/adapters.fa ktrim=r k=23 mink=11 hdist=1 tpe tbo qtrim=r trimq=10"
+
 
 
 
