@@ -9,7 +9,9 @@ rule all:
     input:
         # expand("data_output/{sample}_fastqc.html", sample=FASTQ_FILES)
         "data_output_multiqc/multiqc_report.html",
-        expand("data_output_bbduk_trimed/{sample}_bbduk.fastq", sample=FASTQ_FILES)
+        expand("data_output_bbduk_trimed/{sample}_bbduk.fastq", sample=FASTQ_FILES),
+        # expand("data_output_fastqc_trimed/{sample}_fastqc_trimed.html", sample=FASTQ_FILES) 
+        expand("data_output_fastqc_trimed/{sample}_bbduk_fastqc.html", sample=FASTQ_FILES) 
 
 rule fastqc:
     input:
@@ -26,6 +28,7 @@ rule multiqc:
         "data_output_multiqc/multiqc_report.html", 
     shell:
         "multiqc data_output -o data_output_multiqc" 
+
 rule bbduk_trim_barcodes:
     input:
         "data/{sample}.fastq.gz"
@@ -34,6 +37,13 @@ rule bbduk_trim_barcodes:
     shell:
         "bbduk.sh in={input} out={output} ref=data/adapters.fa ktrim=r k=23 mink=11 hdist=1 tpe tbo qtrim=r trimq=10"
 
+rule fastqc_trimed:
+    input:
+        "data_output_bbduk_trimed/{sample}_bbduk.fastq"
+    output:
+        "data_output_fastqc_trimed/{sample}_bbduk_fastqc.html"
+    shell:
+        "fastqc -o data_output_fastqc_trimed {input}"
 
 
 
