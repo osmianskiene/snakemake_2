@@ -1,9 +1,14 @@
 # List all FASTQ files based on pattern
 FASTQ_FILES = glob_wildcards("data/{sample}.fastq.gz").sample
+# OUTPUT_FILES = glob_wildcards("data_output/{output}.fastq.gz").output
+
+# print(expand("data_output_multiqc/multiqc_report.html", output=OUTPUT_FILES))
+# print(output)
 
 rule all:
     input:
-        expand("data_output_multiqc/multiqc_report.html")
+        # expand("data_output/{sample}_fastqc.html", sample=FASTQ_FILES)
+        "data_output_multiqc/multiqc_report.html"
 
 rule fastqc:
     input:
@@ -15,9 +20,9 @@ rule fastqc:
 
 rule multiqc:
     input:
-        "data_output/{sample}"
+        expand("data_output/{sample}_fastqc.html", sample=FASTQ_FILES)
     output:
-        "data_output_multiqc/{sample}", 
+        "data_output_multiqc/multiqc_report.html", 
     shell:
         "multiqc data_output -o data_output_multiqc" 
 
