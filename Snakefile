@@ -16,8 +16,8 @@ rule all:
         "play_data_ref_annot/Genome",
         expand("data_output_star_mapped/{trimmed}_Aligned.sortedByCoord.out.bam", trimmed=TRIMMED_FILES), 
         expand("data_output_samtools_indexed/{trimmed}.bam.bai", trimmed=TRIMMED_FILES),
-        expand("data_output_featureCount/{trimmed}.txt", trimmed=TRIMMED_FILES)
-
+        expand("data_output_featureCount/{trimmed}_s1.txt", trimmed=TRIMMED_FILES),
+        expand("data_output_featureCount/{trimmed}_s2.txt", trimmed=TRIMMED_FILES)
 
 rule fastqc:
     input:
@@ -59,7 +59,6 @@ rule multiqc_trimmed:
     shell:
         "multiqc data_output_fastqc_trimmed -o data_output_multiqc_trimmed"
  
-
 # How to change output directory?
 # Must be run --cores 8
 rule star_index:
@@ -97,6 +96,7 @@ rule star_mapping:
             --outSAMtype BAM SortedByCoordinate \
             --outFileNamePrefix data_output_star_mapped/{wildcards.trimmed}_
         """
+
 rule samtools_index:
     input:
         # "sorted_reads/{sample}.bam"
@@ -106,14 +106,24 @@ rule samtools_index:
     shell:
         "samtools index {input} -o {output}"
 
-rule featureCounts:
+rule featureCounts s1:
     input:
         "data_output_star_mapped/{trimmed}_Aligned.sortedByCoord.out.bam"
     output:
-        "data_output_featureCount/{trimmed}.txt"    
+        "data_output_featureCount/{trimmed}_s1.txt"    
     shell:
-        "featureCounts -p -O -T 8 -a play_data_ref_annot/chr19_20Mb.gtf -o {output} {input}" 
+        "featureCounts -p -t exon -g gene_id -O -T 8 -a play_data_ref_annot/chr19_20Mb.gtf -o {output} {input} -s 1" 
 
+rule featureCounts s2:
+    input:
+        "data_output_star_mapped/{trimmed}_Aligned.sortedByCoord.out.bam"
+    output:
+        "data_output_featureCount/{trimmed}_s2.txt"    
+    shell:
+        "featureCounts -p -t exon -g gene_id -O -T 8 -a play_data_ref_annot/chr19_20Mb.gtf -o {output} {input} -s 2" 
+
+# KAPA_mRNA_HyperPrep_-UHRR-KAPA-100_ng_total_RNA-2_S7_L001_s2.bam 
+# Assigned	79965
 
 
 
