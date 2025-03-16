@@ -1,0 +1,154 @@
+STAR version=2.7.11b
+STAR compilation time,server,dir=2024-01-25T16:12:02-05:00 :/home/dobin/data/STAR/STARcode/STAR.master/source
+STAR git: On branch master ; commit a72e5fa27331108f524211d667949dc5ff4072e8 ; diff files: CHANGES.md README.md doc/STARmanual.pdf extras/doc-latex/STARmanual.tex extras/doc-latex/parametersDefault.tex extras/docker/Dockerfile source/VERSION 
+##### Command Line:
+star/STAR --runThreadN 8 --genomeDir play_data_ref_annot --readFilesIn data_output_bbduk_trimmed/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_R1_001_bbduk.fastq data_output_bbduk_trimmed/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_R2_001_bbduk.fastq --outSAMtype BAM SortedByCoordinate --outFileNamePrefix data_output_star_mapped/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_
+##### Initial USER parameters from Command Line:
+outFileNamePrefix                 data_output_star_mapped/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_
+###### All USER parameters from Command Line:
+runThreadN                    8     ~RE-DEFINED
+genomeDir                     play_data_ref_annot     ~RE-DEFINED
+readFilesIn                   data_output_bbduk_trimmed/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_R1_001_bbduk.fastq   data_output_bbduk_trimmed/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_R2_001_bbduk.fastq        ~RE-DEFINED
+outSAMtype                    BAM   SortedByCoordinate        ~RE-DEFINED
+outFileNamePrefix             data_output_star_mapped/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_     ~RE-DEFINED
+##### Finished reading parameters from all sources
+
+##### Final user re-defined parameters-----------------:
+runThreadN                        8
+genomeDir                         play_data_ref_annot
+readFilesIn                       data_output_bbduk_trimmed/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_R1_001_bbduk.fastq   data_output_bbduk_trimmed/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_R2_001_bbduk.fastq   
+outFileNamePrefix                 data_output_star_mapped/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_
+outSAMtype                        BAM   SortedByCoordinate   
+
+-------------------------------
+##### Final effective command line:
+star/STAR   --runThreadN 8   --genomeDir play_data_ref_annot   --readFilesIn data_output_bbduk_trimmed/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_R1_001_bbduk.fastq   data_output_bbduk_trimmed/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_R2_001_bbduk.fastq      --outFileNamePrefix data_output_star_mapped/KAPA_mRNA_HyperPrep_-HBR-KAPA-100_ng_total_RNA-2_S5_L001_   --outSAMtype BAM   SortedByCoordinate   
+----------------------------------------
+
+Number of fastq files for each mate = 1
+ParametersSolo: --soloCellFilterType CellRanger2.2 filtering parameters:  3000 0.99 10
+WARNING: --limitBAMsortRAM=0, will use genome size as RAM limit for BAM sorting
+Finished loading and checking parameters
+Reading genome generation parameters:
+### star/STAR   --runMode genomeGenerate      --runThreadN 8   --genomeDir play_data_ref_annot   --genomeFastaFiles play_data_ref_annot/chr19_20Mb.fa      --sjdbGTFfile play_data_ref_annot/chr19_20Mb.gtf
+### GstrandBit=32
+versionGenome                 2.7.4a     ~RE-DEFINED
+genomeType                    Full     ~RE-DEFINED
+genomeFastaFiles              play_data_ref_annot/chr19_20Mb.fa        ~RE-DEFINED
+genomeSAindexNbases           14     ~RE-DEFINED
+genomeChrBinNbits             18     ~RE-DEFINED
+genomeSAsparseD               1     ~RE-DEFINED
+genomeTransformType           None     ~RE-DEFINED
+genomeTransformVCF            -     ~RE-DEFINED
+sjdbOverhang                  100     ~RE-DEFINED
+sjdbFileChrStartEnd           -        ~RE-DEFINED
+sjdbGTFfile                   play_data_ref_annot/chr19_20Mb.gtf     ~RE-DEFINED
+sjdbGTFchrPrefix              -     ~RE-DEFINED
+sjdbGTFfeatureExon            exon     ~RE-DEFINED
+sjdbGTFtagExonParentTranscripttranscript_id     ~RE-DEFINED
+sjdbGTFtagExonParentGene      gene_id     ~RE-DEFINED
+sjdbInsertSave                Basic     ~RE-DEFINED
+genomeFileSizes               20385083   165321753        ~RE-DEFINED
+Genome version is compatible with current STAR
+Number of real (reference) chromosomes= 1
+1	chr19	19999999	0
+--sjdbOverhang = 100 taken from the generated genome
+Started loading the genome: Sun Mar 16 16:04:43 2025
+
+Genome: size given as a parameter = 20385083
+SA: size given as a parameter = 165321753
+SAindex: size given as a parameter = 1
+Read from SAindex: pGe.gSAindexNbases=14  nSAi=357913940
+nGenome=20385083;  nSAbyte=165321753
+GstrandBit=32   SA number of indices=40078000
+Shared memory is not used for genomes. Allocated a private copy of the genome.
+Genome file size: 20385083 bytes; state: good=1 eof=0 fail=0 bad=0
+Loading Genome ... done! state: good=1 eof=0 fail=0 bad=0; loaded 20385083 bytes
+SA file size: 165321753 bytes; state: good=1 eof=0 fail=0 bad=0
+Loading SA ... done! state: good=1 eof=0 fail=0 bad=0; loaded 165321753 bytes
+Loading SAindex ... done: 1565873619 bytes
+Finished loading the genome: Sun Mar 16 16:04:43 2025
+
+Processing splice junctions database sjdbN=995,   pGe.sjdbOverhang=100 
+alignIntronMax=alignMatesGapMax=0, the max intron size will be approximately determined by (2^winBinNbits)*winAnchorDistNbins=589824
+Created thread # 1
+Created thread # 2
+Created thread # 3
+Created thread # 4
+Created thread # 5
+Created thread # 6
+Created thread # 7
+Thread #3 end of input stream, nextChar=-1
+Completed: thread #4
+Completed: thread #6
+Completed: thread #5
+Completed: thread #0
+Completed: thread #7
+BAM sorting: 8158 mapped reads
+BAM sorting bins genomic start loci:
+1	0	440218
+2	0	557411
+3	0	579640
+4	0	581425
+5	0	582791
+6	0	583093
+7	0	583270
+8	0	608087
+9	0	616166
+10	0	647651
+11	0	727647
+12	0	738194
+13	0	746592
+14	0	747036
+15	0	747619
+16	0	747948
+17	0	806538
+18	0	881618
+19	0	1009771
+20	0	1085157
+21	0	1104699
+22	0	1105495
+23	0	1105775
+24	0	1106607
+25	0	1223039
+26	0	1244093
+27	0	1258410
+28	0	1271003
+29	0	1271994
+30	0	1272570
+31	0	1272865
+32	0	1274423
+33	0	1368157
+34	0	1390914
+35	0	1399797
+36	0	1438416
+37	0	1440120
+38	0	1440226
+39	0	1456871
+40	0	1468808
+41	0	1471870
+42	0	1473079
+43	0	1578373
+44	0	1599473
+45	0	1852442
+46	0	1880046
+47	0	1969919
+48	0	1986318
+Completed: thread #3
+Completed: thread #1
+Joined thread # 1
+Completed: thread #2
+Joined thread # 2
+Joined thread # 3
+Joined thread # 4
+Joined thread # 5
+Joined thread # 6
+Joined thread # 7
+Mar 16 16:04:52 ..... finished mapping
+RAM after mapping:
+VmPeak:	 3311360 kB; VmSize:	 3221236 kB; VmHWM:	 2669036 kB; VmRSS:	 2659984 kB; 
+RAM after freeing genome index memory:
+VmPeak:	 3311360 kB; VmSize:	 1510704 kB; VmHWM:	 2669036 kB; VmRSS:	  949460 kB; 
+Mar 16 16:04:52 ..... started sorting BAM
+Max memory needed for sorting = 487208
+ALL DONE!

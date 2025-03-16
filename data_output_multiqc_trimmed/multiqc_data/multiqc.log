@@ -1,0 +1,2 @@
+[2025-03-16 15:31:23,633] multiqc.core.file_search                           [INFO   ]  Search path: /home/mn/snakemake_2/data_output_fastqc_trimmed
+[2025-03-16 15:31:24,324] multiqc.modules.fastqc.fastqc                      [INFO   ]  Found 16 reports
