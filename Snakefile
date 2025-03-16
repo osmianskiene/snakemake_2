@@ -112,7 +112,7 @@ rule featureCounts:
     output:
         "data_output_featureCount/{trimmed}.txt"    
     shell:
-        "featureCounts -p -O -T 8 -a play_data_ref_annot/chr19_20Mb.gtf -o {output} {input}"
+        "featureCounts -p -O -T 8 -a play_data_ref_annot/chr19_20Mb.gtf -o {output} {input}" 
 
 
 
