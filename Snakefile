@@ -15,7 +15,8 @@ rule all:
         "data_output_multiqc_trimmed/multiqc_report.html",
         "play_data_ref_annot/Genome",
         expand("data_output_star_mapped/{trimmed}_Aligned.sortedByCoord.out.bam", trimmed=TRIMMED_FILES), 
-        expand("data_output_samtools_indexed/{trimmed}.bam.bai", trimmed=TRIMMED_FILES) 
+        expand("data_output_samtools_indexed/{trimmed}.bam.bai", trimmed=TRIMMED_FILES),
+        expand("data_output_featureCount/{trimmed}.txt", trimmed=TRIMMED_FILES)
 
 
 rule fastqc:
@@ -105,6 +106,13 @@ rule samtools_index:
     shell:
         "samtools index {input} -o {output}"
 
+rule featureCounts:
+    input:
+        "data_output_star_mapped/{trimmed}_Aligned.sortedByCoord.out.bam"
+    output:
+        "data_output_featureCount/{trimmed}.txt"    
+    shell:
+        "featureCounts -p -O -T 8 -a play_data_ref_annot/chr19_20Mb.gtf -o {output} {input}"
 
 
 
