@@ -3,6 +3,7 @@
 /data_output/
 /data_output_multiqc/
 /play_data_ref_annot/
-/data_output_bbduk_trimed/
-/data_output_fastqc_trimed/
-/data_output_multiqc_trimed/
+/data_output_bbduk_trimmed/
+/data_output_fastqc_trimmed/
+/data_output_multiqc_trimmed/
+/data_output_star_mapped/
