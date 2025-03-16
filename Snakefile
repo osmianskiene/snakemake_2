@@ -14,7 +14,9 @@ rule all:
         expand("data_output_fastqc_trimmed/{sample}_bbduk_fastqc.html", sample=FASTQ_FILES),
         "data_output_multiqc_trimmed/multiqc_report.html",
         "play_data_ref_annot/Genome",
-        expand("data_output_star_mapped/{trimmed}_Aligned.sortedByCoord.out.bam", trimmed=TRIMMED_FILES) 
+        expand("data_output_star_mapped/{trimmed}_Aligned.sortedByCoord.out.bam", trimmed=TRIMMED_FILES), 
+        expand("data_output_samtools_indexed/{trimmed}.bam.bai", trimmed=TRIMMED_FILES) 
+
 
 rule fastqc:
     input:
@@ -75,6 +77,7 @@ rule star_index:
         """
 
 # Must be run --cores 1
+# Mapped paired, total 8 and not 16. Is it ok?
 rule star_mapping:
     message: 
         "MONIKA MONIKA MONIKA MONIKA MONIKA MONIKA MONIKA MONIKA",
@@ -93,6 +96,14 @@ rule star_mapping:
             --outSAMtype BAM SortedByCoordinate \
             --outFileNamePrefix data_output_star_mapped/{wildcards.trimmed}_
         """
+rule samtools_index:
+    input:
+        # "sorted_reads/{sample}.bam"
+        "data_output_star_mapped/{trimmed}_Aligned.sortedByCoord.out.bam"
+    output:
+        "data_output_samtools_indexed/{trimmed}.bam.bai"
+    shell:
+        "samtools index {input} -o {output}"
 
 
 

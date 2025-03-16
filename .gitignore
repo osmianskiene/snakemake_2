@@ -7,3 +7,4 @@
 /data_output_fastqc_trimmed/
 /data_output_multiqc_trimmed/
 /data_output_star_mapped/
+/data_output_samtools_indexed/
