@@ -1,6 +1,6 @@
 # List all FASTQ files based on pattern
 FASTQ_FILES = glob_wildcards("data/{sample}.fastq.gz").sample
-TRIMMED_FILES = glob_wildcards("data_output_bbduk_trimmed/{trimmed}_R1_001_bbduk.fastq").trimmed
+TRIMMED_FILES = glob_wildcards("data/{trimmed}_R1_001.fastq.gz").trimmed
 
 # print(expand("data_output_multiqc/multiqc_report.html", output=OUTPUT_FILES))
 print(TRIMMED_FILES)
