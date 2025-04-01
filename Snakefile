@@ -1,6 +1,9 @@
 # List all FASTQ files based on pattern
 FASTQ_FILES = glob_wildcards("data/{sample}.fastq.gz").sample
 TRIMMED_FILES = glob_wildcards("data/{trimmed}_R1_001.fastq.gz").trimmed
+TRIMMED_FILES = glob_wildcards("data/{trimmed}_R1_001.fastq.gz").trimmed
+COLLIBRI_FILES = glob_wildcards("data/Collibri_{collibri}_R1_001.fastq.gz").collibri
+KAPA_FILES = glob_wildcards("data/KAPA_{kapa}_R1_001.fastq.gz").kapa
 
 # print(expand("data_output_multiqc/multiqc_report.html", output=OUTPUT_FILES))
 print(TRIMMED_FILES)
@@ -17,7 +20,10 @@ rule all:
         expand("data_output_star_mapped/{trimmed}_Aligned.sortedByCoord.out.bam", trimmed=TRIMMED_FILES), 
         expand("data_output_samtools_indexed/{trimmed}.bam.bai", trimmed=TRIMMED_FILES),
         expand("data_output_featureCount/{trimmed}_s1.txt", trimmed=TRIMMED_FILES),
-        expand("data_output_featureCount/{trimmed}_s2.txt", trimmed=TRIMMED_FILES)
+        expand("data_output_featureCount/{trimmed}_s2.txt", trimmed=TRIMMED_FILES),
+        expand("data_output_selected/{trimmed}.txt", trimmed=TRIMMED_FILES),
+        "data_output_matrix/Collibri.txt",
+        "data_output_matrix/KAPA.txt"         
 
 rule fastqc:
     input:
@@ -122,8 +128,39 @@ rule featureCounts s2:
     shell:
         "featureCounts -p -t exon -g gene_id -O -T 8 -a play_data_ref_annot/chr19_20Mb.gtf -o {output} {input} -s 2" 
 
+rule select_s1_or_s2:
+    input:
+        "data_output_featureCount/{trimmed}_s1.txt",
+        "data_output_featureCount/{trimmed}_s2.txt"
+    output:
+        "data_output_selected/{trimmed}.txt"    
+    shell:
+        "python3 select_best.py {input} {output}" 
+
+rule collibri_matrix:
+    input:
+        expand("data_output_selected/Collibri_{collibri}.txt", collibri=COLLIBRI_FILES)
+    output:
+        "data_output_matrix/Collibri.txt"    
+    shell:
+        "python3 count_matrix.py {input} {output}" 
+
+rule kapa_matrix:
+    input:
+        expand("data_output_selected/KAPA_{kapa}.txt", kapa=KAPA_FILES)
+    output:
+        "data_output_matrix/KAPA.txt"    
+    shell:
+        "python3 count_matrix.py {input} {output}" 
+
+
+
 # KAPA_mRNA_HyperPrep_-UHRR-KAPA-100_ng_total_RNA-2_S7_L001_s2.bam 
 # Assigned	79965
+
+# Prainkti viena is dvieju ir vienam meginiui visus failu duomenis ir padarytu countu eilute. Y - stulpeliai meginys arba failas, o eilute - genai. Selection rule, kad pasirinktu viena is s1 s2
+
+
 
 
 
