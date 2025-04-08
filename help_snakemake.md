@@ -46,5 +46,5 @@ echo $PATH
 ```
 1. Vykdyk sia komanda tik jeigu kazkas paprase output filo ir jo nera.
 2. Tada, jei vykdai isitikink, kad yra input failas
-3.  Jei nera - surask kita komanda, kuri generuoja ir paleisk ja.
-4.  Jei yra - tai vykdyk shell komandą.
+3. Jei nera - surask kita komanda, kuri generuoja ir paleisk ja.
+4. Jei yra - tai vykdyk shell komandą.
